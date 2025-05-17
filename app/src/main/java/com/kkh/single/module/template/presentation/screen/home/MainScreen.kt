@@ -68,7 +68,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.kkh.single.module.template.presentation.component.CustomCalendar
+import com.kkh.single.module.template.presentation.screen.recipe.RecipeViewModel
+import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
@@ -76,6 +79,7 @@ import com.kkh.single.module.template.presentation.component.CustomCalendar
 fun MainScreen(onNavigateToSelectScreen: () -> Unit = {}) {
     val sheetState = rememberBottomSheetScaffoldState()
     val scope = rememberCoroutineScope()
+    val recipeViewModel: RecipeViewModel = hiltViewModel()
 
     var isSwitched by remember { mutableStateOf(false) }
     var selectedDateState by remember { mutableStateOf("") }
@@ -95,6 +99,12 @@ fun MainScreen(onNavigateToSelectScreen: () -> Unit = {}) {
 
     LaunchedEffect(selectedDateState) {
         sheetState.bottomSheetState.expand()
+    }
+
+    LaunchedEffect(Unit) {
+        recipeViewModel.getVeganMenus(
+            date = "2024-10-01"
+        )
     }
 
     BottomSheetScaffold(
