@@ -1,9 +1,8 @@
-package com.kkh.single.module.template.data.source
+package com.kkh.single.module.template.data.source.local
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.kkh.single.module.template.data.source.local.DataStoreManager
 import jakarta.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first

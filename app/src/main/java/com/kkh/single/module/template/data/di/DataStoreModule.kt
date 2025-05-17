@@ -5,7 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStoreFile
 import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
-import com.kkh.single.module.template.data.source.LocalDataSource
+import com.kkh.single.module.template.data.source.local.LocalDataSource
 import com.kkh.single.module.template.data.source.local.DataStoreManager
 import dagger.Module
 import dagger.Provides

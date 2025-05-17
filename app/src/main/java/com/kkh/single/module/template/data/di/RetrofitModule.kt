@@ -12,7 +12,6 @@ import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
-
 // NetworkQualifiers.kt
 // baseUrl 이 두 개 이상일 때 retrofit을 다르게 생성 후 주입 필요.
 
