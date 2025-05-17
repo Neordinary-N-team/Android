@@ -20,11 +20,34 @@ object NeodinaryColors {
         val WGray600 = Color(0xFF777777)
         val WGray700 = Color(0xFF535353)
         val WGray800 = Color(0xFF313131)
+        val wGray_A9 = Color(0xFFA9A9A9)
     }
-    object White{
+
+    object White {
         val White = Color(0xFFFFFFFF)
     }
-    object Black{
+
+    object Black {
         val Black = Color(0xFF131313)
+    }
+
+    object Green {
+        val Green200 = Color(0xFF77EA1F)
+        val Green300 = Color(0xFF47DB11)
+        val Green400 = Color(0xFF2BAB08)
+        val Green500 = Color(0xFF227D03)
+        val Green600 = Color(0xFF105200)
+    }
+
+    object Red {
+        val SemanticDanger = Color(0xFFFF4545)
+    }
+
+    object Yellow {
+        val Warning = Color(0xFFFFB310)
+    }
+
+    object Blue {
+        val Informative = Color(0xFF3078FF)
     }
 }

@@ -96,6 +96,12 @@ object NeodinaryTypography {
         lineHeight = 30.8.sp,
         fontWeight = FontWeight.Medium
     )
+    val OnBoarding_Normal = TextStyle(
+        fontFamily = FontFamily(Font(R.font.pretendard_medium)),
+        fontSize = 15.sp,
+        lineHeight = 30.8.sp,
+        fontWeight = FontWeight.Medium
+    )
     val Body2_Regular = TextStyle(
         fontFamily = FontFamily(Font(R.font.pretendard_regular)),
         fontSize = 14.sp,

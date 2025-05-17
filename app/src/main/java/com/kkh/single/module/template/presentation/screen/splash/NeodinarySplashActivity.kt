@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.kkh.single.module.template.MainActivity
 import com.kkh.single.module.template.R
+import com.kkh.single.module.template.presentation.navigation.Routes
 import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 import com.kkh.single.module.template.presentation.theme.NeodinaryTheme
 import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
@@ -50,9 +51,9 @@ class NeodinarySplashActivity : ComponentActivity() {
                     CustomSplashScreen(
                         onTimeout = {
                             showCustomSplash = false
-                            startActivity(
-                                Intent(this@NeodinarySplashActivity, MainActivity::class.java)
-                            )
+                            val intent = Intent(this@NeodinarySplashActivity, MainActivity::class.java)
+                            intent.putExtra("start_route", Routes.ONBOARDING)
+                            startActivity(intent)
                             finish()
                         }
                     )

@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.kkh.single.module.template.presentation.navigation.AppNavGraph
+import com.kkh.single.module.template.presentation.navigation.Routes
 import com.kkh.single.module.template.presentation.theme.NeodinaryTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,8 +24,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
+            val startRoute = intent.getStringExtra("start_route") ?: Routes.ONBOARDING
 
-            AppNavGraph(navController)
+            AppNavGraph(
+                navController = navController,
+                startRoute = startRoute
+            )
         }
     }
 }
