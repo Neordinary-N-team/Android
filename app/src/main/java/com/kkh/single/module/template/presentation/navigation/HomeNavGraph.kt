@@ -4,15 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.kkh.single.module.template.presentation.screen.home.FirstScreen
 import com.kkh.single.module.template.presentation.screen.home.HomeScreen
-import com.kkh.single.module.template.presentation.screen.home.ThirdScreen
+import com.kkh.single.module.template.presentation.screen.home.MainScreen
+import com.kkh.single.module.template.presentation.screen.home.MyPageScreen
 import com.kkh.single.module.template.presentation.screen.selectdate.SelectDateScreen
 
 object HomeRoutes {
-    const val First = "First"
-    const val SelectDate = "SelectDate"
-    const val Third = "Third"
+    const val MAIN = "MAIN"
+    const val SELECT_DATE = "SELECT_DATE"
+    const val MYPAGE = "MYPAGE"
 }
 
 @Composable
@@ -20,21 +20,20 @@ fun HomeNavGraph(
     navController: NavHostController,
     onNavigateToSelectScreen: () -> Unit = {}
 ) {
-
     NavHost(
         navController = navController,
-        startDestination = HomeRoutes.First
+        startDestination = HomeRoutes.MAIN
     ) {
-        composable(HomeRoutes.First) {
-            FirstScreen(onNavigateToSelectScreen = {
+        composable(HomeRoutes.MAIN) {
+            MainScreen(onNavigateToSelectScreen = {
                 onNavigateToSelectScreen()
             })
         }
-        composable(HomeRoutes.SelectDate) {
+        composable(HomeRoutes.SELECT_DATE) {
             SelectDateScreen()
         }
-        composable(HomeRoutes.Third) {
-            ThirdScreen()
+        composable(HomeRoutes.MYPAGE) {
+            MyPageScreen()
         }
     }
 }
