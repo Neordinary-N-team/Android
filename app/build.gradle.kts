@@ -41,56 +41,55 @@ android {
 
 dependencies {
 
-    dependencies {
-        // Core & Compose 관련
-        implementation(libs.androidx.core.ktx)
-        implementation(libs.androidx.lifecycle.runtime.ktx)
-        implementation(libs.androidx.activity.compose)
-        implementation(platform(libs.androidx.compose.bom))
-        implementation(libs.androidx.ui)
-        implementation(libs.androidx.ui.graphics)
-        implementation(libs.androidx.ui.tooling.preview)
-        implementation(libs.androidx.material3)
-        implementation(libs.androidx.appcompat)
-        implementation(libs.material)
-        implementation(libs.desugar.jdk.libs)
-        implementation(libs.androidx.navigation.compose.android)
+    // Core & Compose 관련
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.desugar.jdk.libs)
+    implementation(libs.androidx.navigation.compose.android)
+    implementation(libs.androidx.core.splashscreen)
 
-        //ksp
-        implementation(libs.ksp.gradlePlugin)
+    //ksp
+    implementation(libs.ksp.gradlePlugin)
 
-        // Hilt 관련
-        implementation(libs.hilt.android)
-        implementation(libs.hilt.navigation)
-        implementation(libs.hilt.navigation.compose)
-        implementation(libs.hilt.ext.work)
-        testImplementation(libs.hilt.android.testing)
-        androidTestImplementation(libs.hilt.android.testing)
+    // Hilt 관련
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.hilt.ext.work)
+    testImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.hilt.android.testing)
 
-        // Retrofit 관련
-        implementation(libs.retrofit)
-        implementation(libs.retrofit.kotlin.serialization)
-        implementation(libs.retrofit.gson)
+    // Retrofit 관련
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.retrofit.gson)
 
-        // OkHttp 관련
-        implementation(platform(libs.okhttp.bom))
-        implementation(libs.okhttp)
-        implementation(libs.okhttp.logging)
+    // OkHttp 관련
+    implementation(platform(libs.okhttp.bom))
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
 
-        // DataStore 관련
-        implementation(libs.datastore)
+    // DataStore 관련
+    implementation(libs.datastore)
 
-        implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.work.runtime.ktx)
 
-        // 테스트 관련
-        testImplementation(libs.junit)
-        androidTestImplementation(libs.androidx.junit)
-        androidTestImplementation(libs.androidx.espresso.core)
-        androidTestImplementation(platform(libs.androidx.compose.bom))
-        androidTestImplementation(libs.androidx.ui.test.junit4)
+    // 테스트 관련
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.ui.test.junit4)
 
-        // 디버그 관련
-        debugImplementation(libs.androidx.ui.tooling)
-        debugImplementation(libs.androidx.ui.test.manifest)
-    }
+    // 디버그 관련
+    debugImplementation(libs.androidx.ui.tooling)
+    debugImplementation(libs.androidx.ui.test.manifest)
 }

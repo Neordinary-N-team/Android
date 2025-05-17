@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Main</string>
+    <string name="title_activity_neodinary_splash">NeodinarySplashActivity</string>
 </resources>

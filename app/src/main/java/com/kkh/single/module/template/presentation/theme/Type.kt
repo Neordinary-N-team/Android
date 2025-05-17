@@ -36,6 +36,12 @@ val Typography = Typography(
 )
 
 object NeodinaryTypography {
+    val Splash_SemiBold = TextStyle(
+        fontFamily = FontFamily(Font(R.font.pretendard_semibold)),
+        fontSize = 26.sp,
+        lineHeight = 30.8.sp,
+        fontWeight = FontWeight.SemiBold
+    )
     val Headline1_Bold = TextStyle(
         fontFamily = FontFamily(Font(R.font.pretendard_bold)),
         fontSize = 22.sp,
