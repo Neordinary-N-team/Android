@@ -21,6 +21,7 @@ hiltExt = "1.2.0"
 ksp = "2.1.10-1.0.31"
 
 #retrofit
+materialVersion = "1.6.1"
 retrofit = "2.11.0"
 retrofit-gson = "2.13.1"
 
