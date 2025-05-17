@@ -1,7 +1,11 @@
 package com.kkh.single.module.template.presentation.screen.onboarding
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +18,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,15 +27,20 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.kkh.single.module.template.R
 import com.kkh.single.module.template.presentation.component.ChipTitle
 import com.kkh.single.module.template.presentation.component.CustomBottomButton
 import com.kkh.single.module.template.presentation.component.CustomChip
 import com.kkh.single.module.template.presentation.navigation.Routes
+import com.kkh.single.module.template.presentation.screen.selectdate.SelectDateTopBar
 import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 import com.kkh.single.module.template.presentation.theme.NeodinaryTheme
 import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
@@ -71,7 +82,7 @@ fun InputUserInformationScreen(navController: NavHostController, onNavigateToCal
 
             Spacer(Modifier.height(26.dp))
 
-
+            DatePregnantBar(onClickCalendar = {})
 
             SelectInfoItem(
                 text = "이전 임신 여부",
@@ -134,6 +145,44 @@ fun SelectInfoItem(
                     onClickChip = { onChipSelected(index) },
                     modifier = Modifier.padding(end = 8.dp),
                     isSelected = isSelected
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+fun DatePregnantBar(
+    onClickCalendar: () -> Unit,
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .height(119.dp)
+            .padding(horizontal = 18.dp)
+    ) {
+        HorizontalDivider(thickness = 2.dp, color = NeodinaryColors.Gray.WGray100)
+        OnboardingText("임신 날짜")
+        Spacer(Modifier.height(12.dp))
+        Row(
+            Modifier
+                .clip(RoundedCornerShape(5.dp))
+                .border(BorderStroke(1.dp, NeodinaryColors.Gray.WGray200))
+                .fillMaxWidth().height(49.dp)
+                .padding(horizontal = 14.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                "날짜 선택하기",
+                style = NeodinaryTypography.Body2_Medium,
+                color = NeodinaryColors.Gray.WGray600
+            )
+            IconButton(onClick = { onClickCalendar() }, modifier = Modifier.size(24.dp)) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_onboarding_calendar),
+                    contentDescription = ""
                 )
             }
         }

@@ -158,26 +158,6 @@ fun RecommendMenuScreen(navController: NavHostController, onNavigateToCalendar: 
 }
 
 
-//@Composable
-//fun SelectCanEatFood(
-//    text: String = "먹을 수 있는 것을 모두 선택 해주세요!",
-//    list: List<String>
-//) {
-//    Column(
-//        Modifier
-//            .fillMaxWidth()
-//            .height(119.dp)
-//            .padding(horizontal = 18.dp)
-//    ) {
-//        HorizontalDivider(thickness = 2.dp, color = NeodinaryColors.Gray.WGray100)
-//        OnboardingText(text)
-//        Spacer(Modifier.height(12.dp))
-//
-//        LazyRow {
-//
-//        }
-//    }
-//}
 @Composable
 fun SelectFoodItem(
     name: String,
@@ -246,7 +226,6 @@ fun SelectCanEatFood(
     }
 }
 
-
 @Composable
 fun SpecialInfoItem(
     text: String = "key",
@@ -268,7 +247,7 @@ fun SpecialInfoItem(
             Checkbox(
                 colors = CheckboxDefaults.colors(
                     checkedColor = NeodinaryColors.Green.Green300,
-                    uncheckedColor = NeodinaryColors.White.White,
+                    uncheckedColor = NeodinaryColors.Gray.WGray400,
                     checkmarkColor = NeodinaryColors.Black.Black
                 ),
                 checked = isChecked,
