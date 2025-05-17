@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -181,6 +182,7 @@ class CustomCalendarWithPhoto @JvmOverloads constructor(
                     // 날짜 클릭 리스너 - 미래 날짜는 선택 불가
                     container.textView.setOnClickListener {
                         // 현재 월에 속한 과거 또는 오늘 날짜만 선택 가능
+                        Log.e(TAG, "## [달력] daysOfWeek: $daysOfWeek")
                         if (data.position == DayPosition.MonthDate && !isFutureDate) {
                             if (selectedDate != data.date) {
                                 val oldDate = selectedDate
@@ -245,6 +247,35 @@ class CustomCalendarWithPhoto @JvmOverloads constructor(
 
     private fun updateYearMonthText() {
         binding.tvYearMonth.text = "${currentMonth.year}년 ${currentMonth.monthValue}월"
+    }
+
+    /**
+     * 특정 날짜가 속한 주의 모든 날짜(일~토)를 반환합니다.
+     * @param date 기준 날짜
+     * @return 일요일부터 토요일까지의 날짜 리스트
+     */
+    fun getDatesOfWeek(date: LocalDate = selectedDate ?: LocalDate.now()): List<LocalDate> {
+        // 해당 날짜의 요일 (1: 월요일, 7: 일요일)
+        val dayOfWeek = date.dayOfWeek.value
+
+        // 일요일(7)로 변환 (Java에서는 일요일이 1, 토요일이 7이지만 LocalDate에서는 월요일이 1, 일요일이 7)
+        val sundayAdjustedValue = if (dayOfWeek == 7) 0 else dayOfWeek
+
+        // 해당 주의 일요일 날짜 계산 (현재 날짜에서 요일값만큼 빼기)
+        val sunday = date.minusDays(sundayAdjustedValue.toLong())
+
+        // 일요일부터 토요일까지의 날짜 리스트 생성
+        return (0..6).map { sunday.plusDays(it.toLong()) }
+    }
+
+    /**
+     * 현재 선택된 날짜가 속한 주의 모든 날짜(일~토)를 포맷팅하여 반환합니다.
+     * 형식: ["yyyy.MM.dd", "yyyy.MM.dd", ...]
+     */
+    fun getFormattedDatesOfWeek(): List<String> {
+        return getDatesOfWeek().map { date ->
+            "${date.dayOfMonth}"
+        }
     }
 }
 
