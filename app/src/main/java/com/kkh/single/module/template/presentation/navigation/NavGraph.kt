@@ -1,4 +1,4 @@
-package com.kkh.single.module.template.ui.navigation
+package com.kkh.single.module.template.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
