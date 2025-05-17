@@ -1,5 +1,6 @@
 package com.kkh.single.module.template.presentation.screen.onboarding
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -14,12 +15,16 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.kkh.single.module.template.presentation.component.ChipTitle
+import com.kkh.single.module.template.presentation.component.CustomCalendar
 import com.kkh.single.module.template.presentation.navigation.Routes
 import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 import com.kkh.single.module.template.presentation.theme.NeodinaryTheme
@@ -30,6 +35,10 @@ import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
  */
 @Composable
 fun InputUserInformationScreen(navController: NavHostController) {
+
+    // "2025년 5월" 형태의 값 저장
+    val selectedDateState = remember { mutableStateOf("") }
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -51,17 +60,21 @@ fun InputUserInformationScreen(navController: NavHostController) {
             )
 
             Spacer(modifier = Modifier.height(38.dp))
-            Text(
+            AndroidView(
+                factory = { context ->
+                    CustomCalendar(context).apply {
+                        // 달력에서 날짜 선택 시 "2025년 5월" 형태 문자열 리턴
+                        setOnDateSelectedListener { formattedDate ->
+                            Log.e("test", "## [달력] formattedDate : $formattedDate")
+                            selectedDateState.value = formattedDate
+                        }
+                    }
+                },
                 modifier = Modifier
-                    .size(
-                        width = 355.dp,
-                        height = 349.dp
-                    )
-                    .padding(start = 20.dp)
-                    .background(NeodinaryColors.Black.Black),
-                text = "달력 공간",
-                color = NeodinaryColors.White.White
+                    .fillMaxWidth()
+                    .padding(start = 20.dp, end = 20.dp)
             )
+
             Spacer(modifier = Modifier.height(38.dp))
 
             // 키

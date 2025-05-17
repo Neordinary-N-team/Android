@@ -4,6 +4,14 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+configurations.all {
+    resolutionStrategy {
+        force("androidx.core:core:1.16.0")
+        // 충돌되는 지원 라이브러리 제외
+        exclude(group = "com.android.support", module = "support-compat")
+    }
+}
+
 android {
     namespace = "com.kkh.single.module.template"
     compileSdk = 35
@@ -16,6 +24,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
 
     buildTypes {
@@ -36,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -88,6 +98,12 @@ dependencies {
 
         implementation(libs.coil.compose)
         implementation(libs.coil3.coil.network.okhttp)
+
+        // 달력
+        implementation(libs.material.calendarview)
+        implementation(libs.threetenabp)
+        implementation("com.kizitonwose.calendar:view:2.6.2")
+        implementation("com.kizitonwose.calendar:compose:2.6.2")
 
         // 테스트 관련
         testImplementation(libs.junit)
