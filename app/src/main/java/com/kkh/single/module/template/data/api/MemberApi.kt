@@ -1,5 +1,6 @@
 package com.kkh.single.module.template.data.api
 
+import com.kkh.single.module.template.data.model.request.MemberIdRequest
 import com.kkh.single.module.template.data.model.request.SetMemberInfoRequest
 import com.kkh.single.module.template.data.model.response.GetVeganMenuResponse
 import com.kkh.single.module.template.data.model.response.MemberInfoResponse
@@ -21,4 +22,9 @@ interface MemberApi {
         @Query("memberId") memberId: String,
         @Query("date") date: String,
     ): Response<GetVeganMenuResponse>
+
+    @POST("api/diets")
+    suspend fun requestCreateVeganMenu(
+        @Body body: MemberIdRequest
+    ): Response<Unit>
 }

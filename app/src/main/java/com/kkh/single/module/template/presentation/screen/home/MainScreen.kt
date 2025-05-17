@@ -105,8 +105,9 @@ fun MainScreen(onNavigateToSelectScreen: () -> Unit = {}) {
     }
 
     LaunchedEffect(Unit) {
+        recipeViewModel.requestCreateVeganMenu()
         recipeViewModel.getVeganMenus(
-            date = "2024-10-01"
+            date = "2025-05-20"
         )
     }
 

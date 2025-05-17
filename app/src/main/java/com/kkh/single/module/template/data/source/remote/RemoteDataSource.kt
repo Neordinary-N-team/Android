@@ -1,6 +1,7 @@
 package com.kkh.single.module.template.data.source.remote
 
 import com.kkh.single.module.template.data.api.MemberApi
+import com.kkh.single.module.template.data.model.request.MemberIdRequest
 import com.kkh.single.module.template.data.model.request.SetMemberInfoRequest
 import com.kkh.single.module.template.data.model.response.MemberInfoResponse
 import retrofit2.Response
@@ -15,6 +16,13 @@ class RemoteDataSource @Inject constructor(private val memberApi: MemberApi) {
         } catch (e: Exception) {
             null
         }
+    }
 
+    suspend fun requestCreateMemberInfo(memberInfo : MemberIdRequest): Response<Unit>? {
+        return try {
+            return memberApi.requestCreateVeganMenu(memberInfo)
+        } catch (e: Exception) {
+            null
+        }
     }
 }
