@@ -15,6 +15,7 @@ import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
 
 @Composable
 fun CustomBottomButton(
+    text : String = "완료",
     modifier: Modifier = Modifier,
     onClickButton: () -> Unit,
     enable : Boolean = true
@@ -38,7 +39,7 @@ fun CustomBottomButton(
     ) {
         Text(
             modifier = Modifier.padding(vertical = 9.dp),
-            text = "완료",
+            text = text,
             style = NeodinaryTypography.OnBoarding_Normal
         )
     }

@@ -102,6 +102,7 @@ fun InputUserInformationScreen(
             Spacer(Modifier.height(24.dp))
         }, bottomBar = {
             CustomBottomButton(
+                text = "다음",
                 enable = selectedIndex != -1 && selectedIndex2 != -1 && selectedIndex3 != -1,
                 onClickButton = { onNavigateToRecommendMenu() })
         }) { innerPadding ->

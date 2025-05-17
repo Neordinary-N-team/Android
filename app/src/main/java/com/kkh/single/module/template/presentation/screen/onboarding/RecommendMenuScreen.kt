@@ -73,9 +73,6 @@ data class SelectInfoItem(
 @Composable
 fun RecommendMenuScreen(onNaviGateToCanNotEatFood: () -> Unit) {
 
-    var selectedIndex by remember { mutableIntStateOf(-1) }
-    var selectedIndex2 by remember { mutableIntStateOf(-1) }
-
     val list = listOf("없음", "2회 이상", "1회")
 
     val list2 = listOf(
@@ -83,7 +80,6 @@ fun RecommendMenuScreen(onNaviGateToCanNotEatFood: () -> Unit) {
         SelectInfoItem("식욕저하", R.drawable.ic_onboarding_cancle),
         SelectInfoItem("구토", R.drawable.ic_onboarding_dizziness)
     )
-
 
     val list3 = listOf(
         FoodItem(name = "채소", imageUrl = "https://picsum.photos/200"),
@@ -94,12 +90,19 @@ fun RecommendMenuScreen(onNaviGateToCanNotEatFood: () -> Unit) {
         FoodItem(name = "4", imageUrl = "https://picsum.photos/200")
     )
 
+    var selectedIndex by remember { mutableIntStateOf(-1) }
+    var selectedIndex2 by remember { mutableIntStateOf(-1) }
+    var selectedNames by remember { mutableStateOf<List<String>>(emptyList()) }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             Spacer(Modifier.height(24.dp))
         }, bottomBar = {
-            CustomBottomButton(onClickButton = { onNaviGateToCanNotEatFood() })
+            CustomBottomButton(
+                enable = selectedIndex != -1 && selectedIndex2 != -1 && selectedNames.isNotEmpty(),
+                text = "다음",
+                onClickButton = { onNaviGateToCanNotEatFood() })
         }) { innerPadding ->
         Column(
             modifier = Modifier
@@ -117,8 +120,6 @@ fun RecommendMenuScreen(onNaviGateToCanNotEatFood: () -> Unit) {
                 style = NeodinaryTypography.Caption_Medium,
                 color = NeodinaryColors.Green.Green400
             )
-
-            var selectedNames by remember { mutableStateOf<List<String>>(emptyList()) }
 
             SelectCanEatFood(
                 list = list3,
@@ -311,11 +312,19 @@ fun SelectInfoItemWithIcon(
         OnboardingText(text)
         Spacer(Modifier.height(12.dp))
         LazyRow {
+            item{
+                CustomChip(
+                    chipTitle = "없음",
+                    onClickChip = { onChipSelected(0) },
+                    modifier = Modifier.padding(end = 8.dp),
+                    isSelected = selectedIndex == 0,
+                )
+            }
             itemsIndexed(list) { index, item ->
-                val isSelected = index == selectedIndex
+                val isSelected = index+1 == selectedIndex
                 CustomChip(
                     chipTitle = item.text,
-                    onClickChip = { onChipSelected(index) },
+                    onClickChip = { onChipSelected(index+1) },
                     modifier = Modifier.padding(end = 8.dp),
                     isSelected = isSelected,
                     icon = {
