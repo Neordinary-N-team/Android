@@ -17,4 +17,6 @@ data class VeganMenu(
     @SerializedName("image") val image: String?,
     @SerializedName("calories") val calories: Int?,
     @SerializedName("difficulty") val difficulty: String?,
+    @SerializedName("time") val time: String?,
+
 )

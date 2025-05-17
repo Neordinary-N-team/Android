@@ -1,5 +1,6 @@
 package com.kkh.single.module.template.presentation.screen.home
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -69,10 +70,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.kkh.single.module.template.data.model.response.VeganMenu
 import com.kkh.single.module.template.presentation.component.CustomCalendar
 import com.kkh.single.module.template.presentation.screen.recipe.RecipeViewModel
 import java.util.UUID
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
@@ -114,7 +117,7 @@ fun MainScreen(onNavigateToSelectScreen: () -> Unit = {}) {
         sheetPeekHeight = 100.dp, // 'Little' 상태의 높이
         sheetContent = {
             Box(Modifier.fillMaxHeight(0.8f)) {
-                BottomSheetContent(text)
+                BottomSheetContent(recipeViewModel.allowedVeganFoods.value,text)
             }
 
         },
@@ -177,7 +180,7 @@ fun MainScreen(onNavigateToSelectScreen: () -> Unit = {}) {
 }
 
 @Composable
-fun BottomSheetContent(text : String) {
+fun BottomSheetContent(list : List<VeganMenu>, text : String) {
     Column(
         Modifier
             .background(NeodinaryColors.White.White)
@@ -195,6 +198,8 @@ fun BottomSheetContent(text : String) {
                     "주간 식단을 추천해 드릴게요.",
             style = NeodinaryTypography.HeadLine2_SemiBold
         )
+        list.forEach { menu ->
+        }
         Spacer(Modifier.height(12.dp))
         CardViewItem()
         Spacer(Modifier.height(12.dp))
@@ -208,7 +213,7 @@ fun BottomSheetContent(text : String) {
 
 @Preview
 @Composable
-fun CardViewItem() {
+fun CardViewItem(veganMenu: VeganMenu? = null) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -232,7 +237,7 @@ fun CardViewItem() {
                             .padding(vertical = 4.dp, horizontal = 8.dp)
                     ) {
                         Text(
-                            "아침",
+                            veganMenu?.mealType ?: "점심",
                             style = NeodinaryTypography.Caption_Medium,
                             color = NeodinaryColors.Green.Green400
                         )
@@ -246,7 +251,7 @@ fun CardViewItem() {
                             .padding(vertical = 4.dp, horizontal = 8.dp)
                     ) {
                         Text(
-                            "320kcal",
+                            text = veganMenu?.calories.toString(),
                             style = NeodinaryTypography.Caption_Medium,
                             color = NeodinaryColors.Green.Green400
                         )
@@ -268,7 +273,7 @@ fun CardViewItem() {
                 Spacer(Modifier.width(4.dp))
 
                 Text(
-                    text = "10분",
+                    text = veganMenu?.time ?: "10분",
                     style = NeodinaryTypography.Body2_Regular,
                     color = NeodinaryColors.Green.Green500
                 )
@@ -281,7 +286,7 @@ fun CardViewItem() {
                 Spacer(Modifier.width(4.dp))
 
                 Text(
-                    text = "하",
+                    text = veganMenu?.difficulty?: "중",
                     style = NeodinaryTypography.Body2_Regular,
                     color = NeodinaryColors.Green.Green500
                 )
