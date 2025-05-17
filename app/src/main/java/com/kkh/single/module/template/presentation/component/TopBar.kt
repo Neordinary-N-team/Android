@@ -36,6 +36,7 @@ fun HomeTopBar(
 ) {
     TopAppBar(
         backgroundColor = NeodinaryColors.White.White,
+        elevation = 0.dp,
         modifier = Modifier
             .fillMaxWidth()
             .height(61.dp),

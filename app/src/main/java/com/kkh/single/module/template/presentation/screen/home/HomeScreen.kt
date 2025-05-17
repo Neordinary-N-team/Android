@@ -73,8 +73,8 @@ fun HomeBottomNavigation(navController: NavHostController) {
                         modifier = Modifier.size(30.dp),
                         contentDescription = "",
                         tint = if (currentRoute == item.screenRoute) {
-                            NeodinaryColors.Black.Black
-                        } else NeodinaryColors.White.White
+                            NeodinaryColors.Green.Green300
+                        } else NeodinaryColors.Gray.WGray800
                     )
                 },
                 selectedContentColor = NeodinaryColors.Black.Black,
