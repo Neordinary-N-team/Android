@@ -56,6 +56,8 @@ dependencies {
         implementation(libs.desugar.jdk.libs)
         implementation(libs.androidx.navigation.compose.android)
 
+        implementation (libs.androidx.material) // 또는 최신 버전
+
         //ksp
         implementation(libs.ksp.gradlePlugin)
 

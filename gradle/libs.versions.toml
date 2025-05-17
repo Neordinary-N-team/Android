@@ -31,6 +31,9 @@ okhttp = "4.12.0"
 #datastore
 datastore = "1.1.6"
 
+#androidx-material
+androidx-material = "1.6.1"
+
 
 # Project versions
 projectApplicationId = "com.kkh.multimodule.moduletest"
@@ -65,6 +68,7 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+androidx-material = {group = "androidx.compose.material", name = "material", version.ref = "androidx-material"}
 
 #agp, koltin-gradle
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
