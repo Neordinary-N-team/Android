@@ -29,7 +29,7 @@ class OnBoardingViewModel @Inject constructor(private val remoteDataSource: Remo
     val bannedVegetables: MutableStateFlow<String> = MutableStateFlow("")
     val memberLevel: MutableStateFlow<Int> = MutableStateFlow(1)
 
-    fun requestSetUserInfo() {
+    fun requestSetUserInfo(onNavigate: () -> Unit){
         val request = SetMemberInfoRequest(
             pregDate = pregDate.value,
             height = height.value,
@@ -45,6 +45,7 @@ class OnBoardingViewModel @Inject constructor(private val remoteDataSource: Remo
             val res = remoteDataSource.setMemberInfo(request = request)
             if (res?.body()?.result!= null){
                 localDataSource.saveCustomText(res.body()?.result!!.id)
+                onNavigate()
             }
         }
     }

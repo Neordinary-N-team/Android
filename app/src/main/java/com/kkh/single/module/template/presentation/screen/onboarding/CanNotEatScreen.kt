@@ -48,7 +48,9 @@ fun CanNotEatScreen(
         bottomBar = {CustomBottomButton(onClickButton = {
             navigateToHome()
             onBoardingViewModel.bannedVegetables.value = text.value
-            onBoardingViewModel.requestSetUserInfo()
+            onBoardingViewModel.requestSetUserInfo{
+                navigateToHome()
+            }
         })},
     ) { innerPadding ->
         Column(
