@@ -277,6 +277,16 @@ class CustomCalendarWithPhoto @JvmOverloads constructor(
             "${date.dayOfMonth}"
         }
     }
+
+    fun getSelectedDate(): LocalDate {
+        return selectedDate ?: LocalDate.now()
+    }
+
+    fun getFormattedSelectedDateWithDay(): String {
+        val date = getSelectedDate()
+        val formatter = java.time.format.DateTimeFormatter.ofPattern("yyyy.MM.dd(E)", Locale.getDefault())
+        return date.format(formatter)
+    }
 }
 
 class DayViewContainerWithPhoto(view: View) : ViewContainer(view) {

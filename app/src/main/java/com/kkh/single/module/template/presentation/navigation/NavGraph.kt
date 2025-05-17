@@ -10,10 +10,8 @@ import com.kkh.single.module.template.presentation.screen.home.HomeScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.CalendarScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.CanNotEatScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.InputUserInformationScreen
-import com.kkh.single.module.template.presentation.screen.onboarding.OnBoardingScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.RecommendMenuScreen
-import com.kkh.single.module.template.presentation.screen.selectdate.SelectDateScreen
-import okhttp3.Route
+import com.kkh.single.module.template.presentation.screen.selectdate.DailyRecordScreen
 
 object Routes {
     const val ONBOARDING = "onBoarding"
@@ -83,7 +81,7 @@ fun AppNavGraph(
             HomeScreen(navController)
         }
         composable(Routes.SELECT_DATE) {
-            SelectDateScreen()
+            DailyRecordScreen()
         }
     }
 }
