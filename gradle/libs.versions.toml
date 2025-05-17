@@ -1,5 +1,7 @@
 [versions]
 agp = "8.9.3"
+coilCompose = "3.2.0"
+coilNetworkOkhttp = "3.2.0"
 coreSplashscreen = "1.0.1"
 kotlin = "2.1.10"
 coreKtx = "1.16.0"
@@ -73,6 +75,10 @@ androidx-material = {group = "androidx.compose.material", name = "material", ver
 #agp, koltin-gradle
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin" }
+
+#coil
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil3-coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
 
 #hilt
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
