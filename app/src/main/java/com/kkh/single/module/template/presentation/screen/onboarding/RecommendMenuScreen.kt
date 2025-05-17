@@ -74,9 +74,19 @@ data class SelectInfoItem(
 @Composable
 fun RecommendMenuScreen(
     onBoardingViewModel: OnBoardingViewModel = hiltViewModel(),
-    onNaviGateToCanNotEatFood: () -> Unit) {
+    onNaviGateToCanNotEatFood: () -> Unit
+) {
 
     val list = listOf("없음", "2회 이상", "1회")
+
+    fun indexToInt(index: Int) : Int{
+        return when(index){
+            0 -> 0
+            1 -> 1
+            2 -> 2
+            else -> 0
+        }
+    }
 
     val list2 = listOf(
         SelectInfoItem("메스꺼움", R.drawable.ic_onboarding_vomiting),
@@ -105,7 +115,12 @@ fun RecommendMenuScreen(
             CustomBottomButton(
                 enable = selectedIndex != -1 && selectedIndex2 != -1 && selectedNames.isNotEmpty(),
                 text = "다음",
-                onClickButton = { onNaviGateToCanNotEatFood() })
+                onClickButton = {
+                    onNaviGateToCanNotEatFood()
+                    onBoardingViewModel.prePregnant.value = indexToInt(selectedIndex)
+                    onBoardingViewModel.allowedVeganFoods.value = selectedNames
+                    onBoardingViewModel.disease.value =  list2[selectedIndex2].text
+                })
         }) { innerPadding ->
         Column(
             modifier = Modifier
@@ -315,7 +330,7 @@ fun SelectInfoItemWithIcon(
         OnboardingText(text)
         Spacer(Modifier.height(12.dp))
         LazyRow {
-            item{
+            item {
                 CustomChip(
                     chipTitle = "없음",
                     onClickChip = { onChipSelected(0) },
@@ -324,10 +339,10 @@ fun SelectInfoItemWithIcon(
                 )
             }
             itemsIndexed(list) { index, item ->
-                val isSelected = index+1 == selectedIndex
+                val isSelected = index + 1 == selectedIndex
                 CustomChip(
                     chipTitle = item.text,
-                    onClickChip = { onChipSelected(index+1) },
+                    onClickChip = { onChipSelected(index + 1) },
                     modifier = Modifier.padding(end = 8.dp),
                     isSelected = isSelected,
                     icon = {

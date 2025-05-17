@@ -40,16 +40,15 @@ fun CanNotEatScreen(
     onBoardingViewModel: OnBoardingViewModel = hiltViewModel(),
     navigateToHome: () -> Unit){
 
-    var canNotEatFood by remember { mutableStateOf("") }
-
-    var isSpecialChecked by remember { mutableStateOf(false) }
-    var textFieldValue by remember { mutableStateOf("") }
+    val text = remember { mutableStateOf("") }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { Spacer(Modifier.height(24.dp)) },
         bottomBar = {CustomBottomButton(onClickButton = {
             navigateToHome()
+            onBoardingViewModel.bannedVegetables.value = text.value
+            onBoardingViewModel.requestSetUserInfo()
         })},
     ) { innerPadding ->
         Column(
@@ -79,7 +78,7 @@ fun CanNotEatScreen(
                 color = NeodinaryColors.Black.Black,
             )
             Spacer(modifier = Modifier.height(50.dp))
-            val text = remember { mutableStateOf("") }
+
 
             CustomUnderLinedTextField(text.value, onValueChange = { text.value = it })
 

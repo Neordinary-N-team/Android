@@ -77,6 +77,24 @@ fun InputUserInformationScreen(
         "96kg~100kg",
         "101kg 이상"
     )
+    fun indexToInt1(index: Int) : Int{
+        return when(index){
+            0 -> 40
+            1 -> 41
+            2 -> 46
+            3 -> 56
+            4 -> 61
+            5 -> 66
+            6 -> 71
+            7 -> 76
+            8 -> 81
+            9 -> 86
+            10 -> 91
+            11 -> 96
+            12 -> 101
+            else -> 101
+        }
+    }
     val list2 = listOf(
         "150cm 이하",
         "151cm~155cm",
@@ -87,6 +105,19 @@ fun InputUserInformationScreen(
         "176~180cm",
         "181cm 이상"
     )
+    fun indexToInt2(index: Int) : Int{
+        return when(index){
+            0 -> 145
+            1 -> 151
+            2 -> 156
+            3 -> 161
+            4 -> 166
+            5 -> 171
+            6 -> 176
+            7 -> 181
+            else -> 181
+        }
+    }
     val list3 = listOf(
         "20세 이하",
         "21세~25세",
@@ -97,6 +128,19 @@ fun InputUserInformationScreen(
         "50세 이상"
     )
 
+    fun indexToInt3(index: Int) : Int{
+        return when(index){
+            0 -> 19
+            1 -> 21
+            2 -> 26
+            3 -> 36
+            4 -> 41
+            5 -> 46
+            6 -> 50
+            else -> 50
+        }
+    }
+
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -106,7 +150,10 @@ fun InputUserInformationScreen(
             CustomBottomButton(
                 text = "다음",
                 enable = selectedIndex != -1 && selectedIndex2 != -1 && selectedIndex3 != -1,
-                onClickButton = { onNavigateToRecommendMenu() })
+                onClickButton = {
+                    onBoardingViewModel.height.value = indexToInt1(selectedIndex)
+                    onBoardingViewModel.weight.value = indexToInt2(selectedIndex2)
+                    onNavigateToRecommendMenu() })
         }) { innerPadding ->
         Column(
             modifier = Modifier
