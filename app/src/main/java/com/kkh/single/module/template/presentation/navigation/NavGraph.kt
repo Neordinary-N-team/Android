@@ -10,6 +10,7 @@ import com.kkh.single.module.template.presentation.screen.home.HomeScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.CalendarScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.CanNotEatScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.InputUserInformationScreen
+import com.kkh.single.module.template.presentation.screen.onboarding.OnBoardingScreen
 import com.kkh.single.module.template.presentation.screen.onboarding.RecommendMenuScreen
 import com.kkh.single.module.template.presentation.screen.selectdate.DailyRecordScreen
 
