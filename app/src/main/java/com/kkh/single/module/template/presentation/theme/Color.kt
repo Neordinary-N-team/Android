@@ -37,6 +37,7 @@ object NeodinaryColors {
         val Green400 = Color(0xFF2BAB08)
         val Green500 = Color(0xFF227D03)
         val Green600 = Color(0xFF105200)
+        val Green700 = Color(0xFF47DB11)
     }
 
     object Red {

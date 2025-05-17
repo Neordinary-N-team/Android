@@ -4,10 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.kkh.single.module.template.presentation.screen.home.HomeScreen
 import com.kkh.single.module.template.presentation.screen.home.MainScreen
 import com.kkh.single.module.template.presentation.screen.home.MyPageScreen
-import com.kkh.single.module.template.presentation.screen.selectdate.SelectDateScreen
+import com.kkh.single.module.template.presentation.screen.selectdate.DailyRecordScreen
 
 object HomeRoutes {
     const val MAIN = "MAIN"
@@ -30,7 +29,7 @@ fun HomeNavGraph(
             })
         }
         composable(HomeRoutes.MENU) {
-            SelectDateScreen()
+            DailyRecordScreen()
         }
         composable(HomeRoutes.MYPAGE) {
             MyPageScreen()
