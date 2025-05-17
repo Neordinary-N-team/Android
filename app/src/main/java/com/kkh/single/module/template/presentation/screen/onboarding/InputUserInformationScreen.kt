@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.kkh.single.module.template.R
@@ -52,6 +53,7 @@ import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
  */
 @Composable
 fun InputUserInformationScreen(
+    onBoardingViewModel: OnBoardingViewModel = hiltViewModel(),
     date: String = "날짜 선택하기",
     onNavigateToCalendar: () -> Unit,
     onNavigateToRecommendMenu: () -> Unit
@@ -95,6 +97,7 @@ fun InputUserInformationScreen(
         "46세~50세",
         "50세 이상"
     )
+
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),

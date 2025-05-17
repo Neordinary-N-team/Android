@@ -46,8 +46,9 @@ fun CalendarScreen(
                     CustomCalendar(context).apply {
                         // 달력에서 날짜 선택 시 "2025년 5월" 형태 문자열 리턴
                         setOnDateSelectedListener { formattedDate ->
+                            val text = getSelectedDateFormatted()
                             Log.e("test", "## [달력] formattedDate : $formattedDate")
-                            selectedDateState = formattedDate
+                            selectedDateState = text
                         }
                     }
                 },

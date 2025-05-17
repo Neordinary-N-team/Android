@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.kkh.single.module.template.presentation.component.CustomBottomButton
@@ -35,7 +36,9 @@ import com.kkh.single.module.template.presentation.theme.NeodinaryTheme
 import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
 
 @Composable
-fun CanNotEatScreen(navigateToHome: () -> Unit){
+fun CanNotEatScreen(
+    onBoardingViewModel: OnBoardingViewModel = hiltViewModel(),
+    navigateToHome: () -> Unit){
 
     var canNotEatFood by remember { mutableStateOf("") }
 

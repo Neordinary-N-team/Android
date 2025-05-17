@@ -54,7 +54,7 @@ class CustomCalendar @JvmOverloads constructor(
     // 선택된 날짜를 "yyyy년 MM월" 형태로 반환
     fun getSelectedDateFormatted(): String {
         return selectedDate?.let {
-            "${it.year}.${it.monthValue}.${it.dayOfMonth}"
+            "${it.year}-${it.monthValue}-${it.dayOfMonth}"
         } ?: "${currentMonth.year}.${currentMonth.monthValue}"
     }
 

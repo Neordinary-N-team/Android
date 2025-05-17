@@ -35,9 +35,9 @@ fun AppNavGraph(
         navController = navController,
         startDestination = startRoute
     ) {
-//        composable(Routes.ONBOARDING) {
-//            OnBoardingScreen(navController = navController)
-//        }
+        composable(Routes.ONBOARDING) {
+            OnBoardingScreen(navController = navController)
+        }
 
         composable(Routes.INPUT_USER_INFORMATION) {
             InputUserInformationScreen(
@@ -69,7 +69,7 @@ fun AppNavGraph(
             CalendarScreen(onClickBack = {
                 navController.navigate(Routes.INPUT_USER_INFORMATION)
             }, navigateToInputUserInfoScreen = { date ->
-                navController.navigate("${Routes.INPUT_USER_INFORMATION}/{$date}")
+                navController.navigate("${Routes.INPUT_USER_INFORMATION}/$date")
             })
         }
 

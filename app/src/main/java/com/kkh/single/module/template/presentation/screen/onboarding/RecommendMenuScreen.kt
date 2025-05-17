@@ -44,6 +44,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil3.compose.AsyncImage
@@ -71,7 +72,9 @@ data class SelectInfoItem(
  *
  */
 @Composable
-fun RecommendMenuScreen(onNaviGateToCanNotEatFood: () -> Unit) {
+fun RecommendMenuScreen(
+    onBoardingViewModel: OnBoardingViewModel = hiltViewModel(),
+    onNaviGateToCanNotEatFood: () -> Unit) {
 
     val list = listOf("없음", "2회 이상", "1회")
 

@@ -32,9 +32,9 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideJsonPlaceholderRetrofit(): Retrofit {
+    fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com")
+            .baseUrl("https://neohack.duckdns.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(provideOkHttpClient())
             .build()
