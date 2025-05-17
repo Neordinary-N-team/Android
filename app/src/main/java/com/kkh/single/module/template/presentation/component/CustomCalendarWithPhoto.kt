@@ -1,8 +1,13 @@
 package com.kkh.single.module.template.presentation.component
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,6 +17,13 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.children
+import coil3.BitmapImage
+import coil3.DrawableImage
+import coil3.Image
+import coil3.ImageLoader
+import coil3.request.ImageRequest
+import coil3.request.transformations
+import coil3.transform.CircleCropTransformation
 import com.kizitonwose.calendar.core.CalendarDay
 import com.kizitonwose.calendar.core.CalendarMonth
 import com.kizitonwose.calendar.core.DayPosition
@@ -21,28 +33,26 @@ import com.kizitonwose.calendar.view.MonthHeaderFooterBinder
 import com.kizitonwose.calendar.view.ViewContainer
 import com.kkh.single.module.template.R
 import com.kkh.single.module.template.databinding.CalendarDayLayoutBinding
-import com.kkh.single.module.template.databinding.ViewCustomCalendarBinding
+import com.kkh.single.module.template.databinding.ViewCustomCalendarWithPhotoBinding
 import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.TextStyle
 import java.util.Locale
 
-/**
- * 선택한 날을 "yyyy년 MM월" 형태로 리턴하는 달력
- */
-class CustomCalendar @JvmOverloads constructor(
+class CustomCalendarWithPhoto @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val TAG = this::class.simpleName
-    private val binding: ViewCustomCalendarBinding =
-        ViewCustomCalendarBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding: ViewCustomCalendarWithPhotoBinding =
+        ViewCustomCalendarWithPhotoBinding.inflate(LayoutInflater.from(context), this, true)
 
     private var selectedDate: LocalDate? = null
     private var currentMonth = YearMonth.now()
+    private val datesWithPhoto = mutableSetOf<LocalDate>()
 
     // 날짜 선택 콜백
     private var onDateSelectedListener: ((String) -> Unit)? = null
@@ -84,15 +94,6 @@ class CustomCalendar @JvmOverloads constructor(
                 updateYearMonthText()
             }
 
-            // 선택한 월에 해당하는 날짜 표시
-            mcCustom.dayBinder = object : MonthDayBinder<DayViewContainerWithPhoto> {
-                override fun create(view: View): DayViewContainerWithPhoto = DayViewContainerWithPhoto(view)
-
-                override fun bind(container: DayViewContainerWithPhoto, data: CalendarDay) {
-                    container.textView.text = data.date.dayOfMonth.toString()
-                }
-            }
-
             // 오늘 날짜 이전, 이후 연월은 100개월 전까지 표시
             val startMonth = currentMonth.minusMonths(100)
             val endMonth = currentMonth.plusMonths(100)
@@ -127,11 +128,11 @@ class CustomCalendar @JvmOverloads constructor(
                 override fun create(view: View) = DayViewContainerWithPhoto(view)
                 override fun bind(container: DayViewContainerWithPhoto, data: CalendarDay) {
                     container.textView.text = data.date.dayOfMonth.toString()
-                    
+
                     // 오늘 날짜 가져오기
                     val today = LocalDate.now()
                     val isFutureDate = data.date.isAfter(today)
-                    
+
                     // 텍스트 색상 설정
                     when {
                         isFutureDate -> {
@@ -147,22 +148,36 @@ class CustomCalendar @JvmOverloads constructor(
                             container.textView.setTextColor(Color.GRAY)
                         }
                     }
-                    
+
                     container.textView.background = null
-                    
+
                     // 선택된 날짜 스타일 적용 (미래 날짜가 아닌 경우만)
                     if (selectedDate == data.date && !isFutureDate) {
                         // 원형 배경 설정
                         container.textView.background = GradientDrawable().apply {
                             shape = GradientDrawable.OVAL
-                            setColor(NeodinaryColors.Green.Green400.toArgb())
+                            setColor(NeodinaryColors.Green.Green300.toArgb())
                         }
-                        
+
                         // 선택된 날짜는 흰색 텍스트
                         container.textView.setTextColor(Color.WHITE)
                         container.textView.gravity = Gravity.CENTER
+                    } else if (!isFutureDate && selectedDate != data.date) {
+                        // 이미지 URL을 가져오는 코드 (실제 앱에 맞게 수정 필요)
+                        val imageUrl = getImageUrlForDate(data.date)
+
+                        // 이미지로드 함수 호출
+                        loadCircularImageWithBorder(imageUrl, container.textView)
+
+                        // 텍스트 색상 등 다른 스타일 설정
+                        container.textView.setTextColor(Color.WHITE)
                     }
-                    
+
+                    // 날짜 상하좌우 간격 설정
+                    val params = container.textView.layoutParams as ViewGroup.MarginLayoutParams
+                    params.setMargins(dpToPx(4), dpToPx(4), dpToPx(4), dpToPx(4))
+                    container.textView.layoutParams = params
+
                     // 날짜 클릭 리스너 - 미래 날짜는 선택 불가
                     container.textView.setOnClickListener {
                         // 현재 월에 속한 과거 또는 오늘 날짜만 선택 가능
@@ -170,12 +185,12 @@ class CustomCalendar @JvmOverloads constructor(
                             if (selectedDate != data.date) {
                                 val oldDate = selectedDate
                                 selectedDate = data.date
-                                
+
                                 // 이전 선택된 날짜 갱신
                                 oldDate?.let { date ->
                                     mcCustom.notifyDateChanged(date)
                                 }
-                                
+
                                 // 새로 선택된 날짜 갱신 후 콜백에 전달
                                 mcCustom.notifyDateChanged(data.date)
                                 onDateSelectedListener?.invoke(getSelectedDateFormatted())
@@ -183,21 +198,60 @@ class CustomCalendar @JvmOverloads constructor(
                         }
                     }
                 }
+
+                private fun Image.toDrawable(resources: Resources): Drawable {
+                    return when (this) {
+                        is BitmapImage -> BitmapDrawable(resources, bitmap)
+                        is DrawableImage -> drawable
+                        else -> ColorDrawable(Color.TRANSPARENT)
+                    }
+                }
+
+                private fun loadCircularImageWithBorder(imageUrl: String, view: View) {
+                    val imageRequest = ImageRequest.Builder(context)
+                        .data(imageUrl)
+                        .transformations(CircleCropTransformation())
+                        .target { image ->
+                            // Image를 Drawable로 변환
+                            val imageDrawable = image.toDrawable(resources)
+
+                            val border = GradientDrawable().apply {
+                                shape = GradientDrawable.OVAL
+                                setStroke(dpToPx(2), NeodinaryColors.Green.Green400.toArgb())
+                                setColor(Color.TRANSPARENT)
+                            }
+
+                            // 명시적으로 Drawable 배열 생성
+                            val layers = arrayOf<Drawable>(imageDrawable, border)
+                            val layerDrawable = LayerDrawable(layers)
+                            view.background = layerDrawable
+                        }
+                        .build()
+
+                    ImageLoader(context).enqueue(imageRequest)
+                }
             }
 
         }
     }
 
+    private fun dpToPx(dp: Int): Int {
+        return (dp * resources.displayMetrics.density).toInt()
+    }
+
+    private fun getImageUrlForDate(date: LocalDate): String {
+        return "https://static.vecteezy.com/vite/assets/photo-masthead-375-BoK_p8LG.webp"
+    }
+
     private fun updateYearMonthText() {
         binding.tvYearMonth.text = "${currentMonth.year}년 ${currentMonth.monthValue}월"
     }
-
 }
 
-class DayViewContainer(view: View) : ViewContainer(view) {
-     val textView = CalendarDayLayoutBinding.bind(view).calendarDayText
+class DayViewContainerWithPhoto(view: View) : ViewContainer(view) {
+    val textView = CalendarDayLayoutBinding.bind(view).calendarDayText
 }
 
-class MonthViewContainer(view: View) : ViewContainer(view) {
+class MonthViewContainerWithPhoto(view: View) : ViewContainer(view) {
     val titlesContainer = view as ViewGroup
 }
