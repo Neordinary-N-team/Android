@@ -84,6 +84,8 @@ dependencies {
 
         implementation(libs.androidx.work.runtime.ktx)
 
+        implementation(libs.androidx.core.splashscreen)
+
         // 테스트 관련
         testImplementation(libs.junit)
         androidTestImplementation(libs.androidx.junit)
