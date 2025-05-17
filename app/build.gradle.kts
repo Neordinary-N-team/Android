@@ -86,6 +86,9 @@ dependencies {
 
         implementation(libs.androidx.core.splashscreen)
 
+        implementation(libs.coil.compose)
+        implementation(libs.coil3.coil.network.okhttp)
+
         // 테스트 관련
         testImplementation(libs.junit)
         androidTestImplementation(libs.androidx.junit)
