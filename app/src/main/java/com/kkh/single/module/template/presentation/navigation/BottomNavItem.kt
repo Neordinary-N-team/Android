@@ -6,12 +6,12 @@ sealed class BottomNavItem(
     val title: String, val icon: Int, val screenRoute: String
 ) {
     object Calendar :
-        BottomNavItem("title_calendar", R.drawable.ic_home_category, HomeRoutes.First)
+        BottomNavItem("title_calendar", R.drawable.ic_home_category, HomeRoutes.MAIN)
 
     object Timeline :
-        BottomNavItem("title_calendar", R.drawable.ic_home_home, HomeRoutes.SelectDate)
+        BottomNavItem("title_calendar", R.drawable.ic_home_home, HomeRoutes.SELECT_DATE)
 
     object Analysis :
-        BottomNavItem("title_calendar", R.drawable.ic_home_face, HomeRoutes.Third)
+        BottomNavItem("title_calendar", R.drawable.ic_home_face, HomeRoutes.MYPAGE)
 
 }

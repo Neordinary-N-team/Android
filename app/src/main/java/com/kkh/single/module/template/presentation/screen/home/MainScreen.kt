@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.kkh.single.module.template.R
-import com.kkh.single.module.template.presentation.navigation.component.NeodinaryTopBar
+import com.kkh.single.module.template.presentation.component.NeodinaryTopBar
 import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
 import com.kkh.single.module.template.presentation.theme.NeodinaryTypography.Body2_Regular

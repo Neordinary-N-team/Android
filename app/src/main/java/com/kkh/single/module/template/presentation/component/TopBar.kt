@@ -1,4 +1,4 @@
-package com.kkh.single.module.template.presentation.navigation.component
+package com.kkh.single.module.template.presentation.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.kkh.single.module.template.R
 import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 
 

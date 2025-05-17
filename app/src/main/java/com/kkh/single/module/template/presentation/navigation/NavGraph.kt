@@ -35,11 +35,17 @@ fun AppNavGraph(
         }
 
         composable(Routes.INPUT_USER_INFORMATION) {
-            InputUserInformationScreen(navController)
+            InputUserInformationScreen(
+                navController = navController,
+                onNavigateToCalendar = {}
+            )
         }
 
         composable(Routes.RECOMMEND_MENU) {
-            RecommendMenuScreen(navController)
+            RecommendMenuScreen(
+                navController = navController,
+                onNavigateToCalendar = {}
+            )
         }
 
         composable(Routes.CAN_NOT_EAT) {
