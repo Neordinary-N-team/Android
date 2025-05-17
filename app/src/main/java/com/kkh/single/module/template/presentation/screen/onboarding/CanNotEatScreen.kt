@@ -46,7 +46,6 @@ fun CanNotEatScreen(
         modifier = Modifier.fillMaxSize(),
         topBar = { Spacer(Modifier.height(24.dp)) },
         bottomBar = {CustomBottomButton(onClickButton = {
-            navigateToHome()
             onBoardingViewModel.bannedVegetables.value = text.value
             onBoardingViewModel.requestSetUserInfo{
                 navigateToHome()
