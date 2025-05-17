@@ -5,13 +5,13 @@ import com.kkh.single.module.template.R
 sealed class BottomNavItem(
     val title: String, val icon: Int, val screenRoute: String
 ) {
-    object Calendar :
-        BottomNavItem("title_calendar", R.drawable.ic_home_category, HomeRoutes.MAIN)
+    object MENU :
+        BottomNavItem("title_menu", R.drawable.ic_home_category, HomeRoutes.MENU)
 
-    object Timeline :
-        BottomNavItem("title_calendar", R.drawable.ic_home_home, HomeRoutes.SELECT_DATE)
+    object MAIN :
+        BottomNavItem("title_home", R.drawable.ic_home_home, HomeRoutes.MAIN)
 
-    object Analysis :
-        BottomNavItem("title_calendar", R.drawable.ic_home_face, HomeRoutes.MYPAGE)
+    object MYPAGE :
+        BottomNavItem("title_mypage", R.drawable.ic_home_face, HomeRoutes.MYPAGE)
 
 }

@@ -11,7 +11,7 @@ import com.kkh.single.module.template.presentation.screen.selectdate.SelectDateS
 
 object HomeRoutes {
     const val MAIN = "MAIN"
-    const val SELECT_DATE = "SELECT_DATE"
+    const val MENU = "MENU"
     const val MYPAGE = "MYPAGE"
 }
 
@@ -29,7 +29,7 @@ fun HomeNavGraph(
                 onNavigateToSelectScreen()
             })
         }
-        composable(HomeRoutes.SELECT_DATE) {
+        composable(HomeRoutes.MENU) {
             SelectDateScreen()
         }
         composable(HomeRoutes.MYPAGE) {

@@ -31,7 +31,7 @@ fun HomeScreen(mainNavController: NavHostController) {
     val homeNavController = rememberNavController()
 
     Scaffold(
-        topBar = { Spacer(Modifier.height(47.dp)) },
+        topBar = {  },
         bottomBar = {
             HomeBottomNavigation(homeNavController)
         }
@@ -51,9 +51,9 @@ fun HomeScreen(mainNavController: NavHostController) {
 fun HomeBottomNavigation(navController: NavHostController) {
 
     val items = listOf<BottomNavItem>(
-        BottomNavItem.Calendar,
-        BottomNavItem.Timeline,
-        BottomNavItem.Analysis,
+        BottomNavItem.MENU,
+        BottomNavItem.MAIN,
+        BottomNavItem.MYPAGE,
     )
 
     BottomNavigation(

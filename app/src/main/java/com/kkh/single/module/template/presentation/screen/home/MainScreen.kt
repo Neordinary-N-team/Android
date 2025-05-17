@@ -18,9 +18,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,12 +55,13 @@ import com.kkh.single.module.template.presentation.theme.NeodinaryTypography.Hea
 fun MainScreen(onNavigateToSelectScreen: () -> Unit = {}) {
 
     Column(modifier = Modifier.background(NeodinaryColors.White.White)) {
-        NeodinaryTopBar(
-            onClickMainIcon = {},
-            onClickAddIcon = {},
-            titleImgResource = R.drawable.ic_home_main,
-            actionsImgResource = R.drawable.ic_home_add
-        )
+//        NeodinaryTopBar(
+//            onClickMainIcon = {},
+//            onClickAddIcon = {},
+//            titleImgResource = R.drawable.ic_home_main,
+//            actionsImgResource = R.drawable.ic_home_add
+//        )
+        MainTopBar()
         TopText()
         Spacer(Modifier.height(24.dp))
         DateText(onClick = {
@@ -79,6 +91,40 @@ fun MainScreen(onNavigateToSelectScreen: () -> Unit = {}) {
     ) {
         WriteDiaryFloatingButton()
     }
+}
+
+@Composable
+fun MainTopBar(){
+    var 스위치_상태 by remember { mutableStateOf(false) }
+    TopAppBar(
+        backgroundColor = NeodinaryColors.White.White,
+        elevation = 0.dp,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(61.dp),
+        title = {
+            Text("식단 추천",style = Headline1_Bold, color = NeodinaryColors.Black.Black)
+        }, actions = {
+            Switch(
+                checked = 스위치_상태,
+                onCheckedChange = { 스위치_상태 = it },
+                thumbContent = {
+                    // 내부 동그라미 커스터마이징
+                    Icon(
+                        painter = if (스위치_상태) painterResource(R.drawable.ic_home_face) else painterResource(R.drawable.ic_home_main),
+                        contentDescription = null,
+                        modifier = Modifier.padding(4.dp),
+                        tint = if (스위치_상태) Color.Blue else Color.Gray
+                    )
+                },
+                colors = SwitchDefaults.colors(
+                    checkedThumbColor = Color(0xFF2196F3), // 켜짐 상태의 동그라미 색상
+                    uncheckedThumbColor = Color.White, // 꺼짐 상태의 동그라미 색상
+                    checkedTrackColor = Color(0xFF64B5F6), // 켜짐 상태의 트랙 색상
+                    uncheckedTrackColor = Color(0xFFB0BEC5) // 꺼짐 상태의 트랙 색상
+                )
+            )
+        })
 }
 
 @Composable
