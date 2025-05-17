@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            val startRoute = intent.getStringExtra("start_route") ?: Routes.ONBOARDING
+            val startRoute = intent.getStringExtra("start_route") ?: Routes.INPUT_USER_INFORMATION
 
             AppNavGraph(
                 navController = navController,

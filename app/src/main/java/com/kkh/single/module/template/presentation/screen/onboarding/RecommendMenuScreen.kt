@@ -14,10 +14,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -37,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,20 +61,29 @@ data class FoodItem(
     val imageUrl: String
 )
 
+data class SelectInfoItem(
+    val text: String,
+    val imageRes: Int,
+)
+
 /**
  * 이전 임신 여부, 입덧 증세, 비건 단계, 기저 질환 선택 / 입력 화면
  *
- * @param navController
  */
 @Composable
-fun RecommendMenuScreen(navController: NavHostController, onNavigateToCalendar: () -> Unit) {
+fun RecommendMenuScreen(onNaviGateToCanNotEatFood: () -> Unit) {
 
     var selectedIndex by remember { mutableIntStateOf(-1) }
     var selectedIndex2 by remember { mutableIntStateOf(-1) }
-    var selectedIndex3 by remember { mutableIntStateOf(-1) }
 
-    val list = listOf("150", "155", "160", "165", "170", "175", "180", "185", "190", "195", "200")
-    val list2 = listOf("40", "45", "50", "55", "60", "65", "70", "75")
+    val list = listOf("없음", "2회 이상", "1회")
+
+    val list2 = listOf(
+        SelectInfoItem("메스꺼움", R.drawable.ic_onboarding_vomiting),
+        SelectInfoItem("식욕저하", R.drawable.ic_onboarding_cancle),
+        SelectInfoItem("구토", R.drawable.ic_onboarding_dizziness)
+    )
+
 
     val list3 = listOf(
         FoodItem(name = "채소", imageUrl = "https://picsum.photos/200"),
@@ -81,9 +94,17 @@ fun RecommendMenuScreen(navController: NavHostController, onNavigateToCalendar: 
         FoodItem(name = "4", imageUrl = "https://picsum.photos/200")
     )
 
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            Spacer(Modifier.height(24.dp))
+        }, bottomBar = {
+            CustomBottomButton(onClickButton = { onNaviGateToCanNotEatFood() })
+        }) { innerPadding ->
         Column(
             modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
                 .fillMaxSize()
                 .padding(
                     top = innerPadding.calculateTopPadding(),
@@ -131,7 +152,7 @@ fun RecommendMenuScreen(navController: NavHostController, onNavigateToCalendar: 
                 onChipSelected = { selectedIndex = it },
                 list = list
             )
-            SelectInfoItem(
+            SelectInfoItemWithIcon(
                 text = "입덧 증세",
                 selectedIndex = selectedIndex2,
                 onChipSelected = { selectedIndex2 = it },
@@ -148,10 +169,6 @@ fun RecommendMenuScreen(navController: NavHostController, onNavigateToCalendar: 
                 textFieldValue = textFieldValue,
                 onTextChanged = { textFieldValue = it }
             )
-
-            Spacer(modifier = Modifier.weight(1f))
-
-            CustomBottomButton(onClickButton = { moveToCanNotEatFood(navController) })
 
         }
     }
@@ -181,7 +198,9 @@ fun SelectFoodItem(
         AsyncImage(
             model = imageUrl,
             contentDescription = name,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .clip(RoundedCornerShape(10.dp))
         )
         Box(
             Modifier
@@ -270,6 +289,46 @@ fun SpecialInfoItem(
                 },
                 modifier = Modifier.fillMaxWidth()
             )
+        }
+    }
+}
+
+
+@Composable
+fun SelectInfoItemWithIcon(
+    text: String = "key",
+    selectedIndex: Int,
+    onChipSelected: (Int) -> Unit,
+    list: List<SelectInfoItem>
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .height(119.dp)
+            .padding(horizontal = 18.dp)
+    ) {
+        HorizontalDivider(thickness = 2.dp, color = NeodinaryColors.Gray.WGray100)
+        OnboardingText(text)
+        Spacer(Modifier.height(12.dp))
+        LazyRow {
+            itemsIndexed(list) { index, item ->
+                val isSelected = index == selectedIndex
+                CustomChip(
+                    chipTitle = item.text,
+                    onClickChip = { onChipSelected(index) },
+                    modifier = Modifier.padding(end = 8.dp),
+                    isSelected = isSelected,
+                    icon = {
+                        Icon(
+                            painter = painterResource(item.imageRes),
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.Unspecified,
+                            contentDescription = ""
+                        )
+                        Spacer(Modifier.width(2.dp))
+                    }
+                )
+            }
         }
     }
 }

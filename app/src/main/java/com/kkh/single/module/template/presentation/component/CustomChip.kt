@@ -26,7 +26,7 @@ fun CustomChip(
     val strokeColor = if (isSelected) NeodinaryColors.Black.Black else NeodinaryColors.Gray.WGray300
 
     SuggestionChip(
-        modifier = modifier.padding(horizontal = 5.dp),
+        modifier = modifier,
         colors = SuggestionChipDefaults.suggestionChipColors(containerColor = chipBackgroundColor),
         border = BorderStroke(1.dp, strokeColor),
         shape = RoundedCornerShape(10.dp),
@@ -35,7 +35,7 @@ fun CustomChip(
         },
         label = {
             Row{
-                icon
+                icon()
                 Text(
                     text = chipTitle,
                     style = NeodinaryTypography.OnBoarding_Normal,

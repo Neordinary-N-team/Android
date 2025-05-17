@@ -52,7 +52,7 @@ class NeodinarySplashActivity : ComponentActivity() {
                         onTimeout = {
                             showCustomSplash = false
                             val intent = Intent(this@NeodinarySplashActivity, MainActivity::class.java)
-                            intent.putExtra("start_route", Routes.ONBOARDING)
+                            intent.putExtra("start_route", Routes.INPUT_USER_INFORMATION)
                             startActivity(intent)
                             finish()
                         }

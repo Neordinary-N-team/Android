@@ -1,6 +1,7 @@
 package com.kkh.single.module.template.presentation.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -13,14 +14,18 @@ import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
 
 @Composable
-fun CustomBottomButton(onClickButton : () -> Unit){
+fun CustomBottomButton(
+    modifier: Modifier = Modifier,
+    onClickButton: () -> Unit,
+    enable : Boolean = true
+){
     Button(
-        modifier = Modifier
+        enabled = enable,
+        modifier = modifier
             .fillMaxWidth()
+            .navigationBarsPadding()
             .padding(
-                start = 26.dp,
-                end = 26.dp,
-                bottom = 48.dp
+                horizontal = 20.dp
             ),
         colors = ButtonDefaults.buttonColors(
             containerColor = NeodinaryColors.Green.Green200,
