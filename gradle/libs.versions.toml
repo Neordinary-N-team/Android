@@ -39,11 +39,13 @@ projectTargetSdkVersion = "35"
 projectCompileSdkVersion = "35"
 desugar_jdk_libs = "2.1.5"
 navigationComposeAndroid = "2.9.0"
+workRuntimeKtx = "2.7.1"
 
 # libraries ------------------------------------------------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------------------------------------------------
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

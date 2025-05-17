@@ -80,6 +80,8 @@ dependencies {
         // DataStore 관련
         implementation(libs.datastore)
 
+        implementation(libs.androidx.work.runtime.ktx)
+
         // 테스트 관련
         testImplementation(libs.junit)
         androidTestImplementation(libs.androidx.junit)
