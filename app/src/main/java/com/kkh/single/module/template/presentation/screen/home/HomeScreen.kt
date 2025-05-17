@@ -1,7 +1,10 @@
 package com.kkh.single.module.template.presentation.screen.home
 
+import android.view.WindowInsets
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.BottomNavigation
@@ -55,7 +58,9 @@ fun NeodinaryBottomNavigation(navController: NavHostController) {
         BottomNavItem.Settings
     )
 
+
     BottomNavigation(
+        modifier = Modifier.navigationBarsPadding(),
         backgroundColor = Color.White,
         contentColor = Color(0xFF3F414E)
     ) {

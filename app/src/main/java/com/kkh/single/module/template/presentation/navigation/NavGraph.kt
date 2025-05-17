@@ -5,6 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.kkh.single.module.template.presentation.screen.home.HomeScreen
+import okhttp3.Route
 
 object Routes {
     const val HOME = "home"
@@ -16,6 +17,7 @@ fun AppNavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = Routes.HOME
     ) {
+
         composable(Routes.HOME) {
             HomeScreen(navController)
         }
