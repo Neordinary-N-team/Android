@@ -34,7 +34,7 @@ class LocalDataSource @Inject constructor(private val dataStoreManager: DataStor
     }
 
     suspend fun getUserId(): String {
-        val userId = dataStoreManager.readString(keyUserId).first()
+        val userId = dataStoreManager.readString(keyString).first()
         return if (userId.isEmpty()) {
             // UUID가 없으면 새로 생성하고 저장
             val newUserId = UUID.randomUUID().toString()

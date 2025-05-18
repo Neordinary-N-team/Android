@@ -190,7 +190,7 @@ fun DailyRecordBottomSheetContent(
                 )
         ) {
             Text(
-                text = "test",
+                text = "식재료",
                 style = NeodinaryTypography.Body2_Medium,
                 color = Color.Black
             )
@@ -244,7 +244,7 @@ fun DailyRecordBottomSheetContent(
                 )
         ) {
             Text(
-                text = "test2",
+                text = "식재료",
                 style = NeodinaryTypography.Body2_Medium,
                 color = Color.Black
             )
@@ -298,7 +298,7 @@ fun DailyRecordBottomSheetContent(
                 )
         ) {
             Text(
-                text = "test3",
+                text = "식재료",
                 style = NeodinaryTypography.Body2_Medium,
                 color = Color.Black
             )

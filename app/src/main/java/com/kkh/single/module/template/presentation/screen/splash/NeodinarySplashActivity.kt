@@ -1,5 +1,6 @@
 package com.kkh.single.module.template.presentation.screen.splash
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,9 +27,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.kkh.single.module.template.MainActivity
 import com.kkh.single.module.template.R
 import com.kkh.single.module.template.presentation.navigation.Routes
+import com.kkh.single.module.template.presentation.screen.onboarding.OnBoardingViewModel
 import com.kkh.single.module.template.presentation.theme.NeodinaryColors
 import com.kkh.single.module.template.presentation.theme.NeodinaryTheme
 import com.kkh.single.module.template.presentation.theme.NeodinaryTypography
@@ -37,6 +40,7 @@ import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class NeodinarySplashActivity : ComponentActivity() {
+    @SuppressLint("StateFlowValueCalledInComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
@@ -44,6 +48,11 @@ class NeodinarySplashActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
+            val viewModel : OnBoardingViewModel = hiltViewModel()
+
+            viewModel.checkUserIdExist()
+            val route = if (viewModel.isUserIdExist.value) Routes.HOME else Routes.INPUT_USER_INFORMATION
+
             NeodinaryTheme {
                 var showCustomSplash by remember { mutableStateOf(true) }
 
@@ -52,7 +61,7 @@ class NeodinarySplashActivity : ComponentActivity() {
                         onTimeout = {
                             showCustomSplash = false
                             val intent = Intent(this@NeodinarySplashActivity, MainActivity::class.java)
-                            intent.putExtra("start_route", Routes.INPUT_USER_INFORMATION)
+                            intent.putExtra("start_route", route)
                             startActivity(intent)
                             finish()
                         }
@@ -81,7 +90,7 @@ fun CustomSplashScreen(onTimeout: () -> Unit) {
             verticalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_launcher_foreground), // FIXME : 앱 로고 확정되면 수정
+                painter = painterResource(id = R.drawable.logo222), // FIXME : 앱 로고 확정되면 수정
                 contentDescription = "앱 로고",
                 modifier = Modifier.size(120.dp)
             )

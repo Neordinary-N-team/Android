@@ -49,4 +49,15 @@ class OnBoardingViewModel @Inject constructor(private val remoteDataSource: Remo
             }
         }
     }
+
+    val isUserIdExist = MutableStateFlow(false)
+
+    fun checkUserIdExist() {
+        viewModelScope.launch {
+            val userId = localDataSource.getCustomText()
+            isUserIdExist.value = !userId.isNullOrBlank()
+        }
+    }
+
+
 }
